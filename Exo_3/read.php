@@ -16,8 +16,7 @@ $credentials = array(
   "couleur" => $_POST['couleur']
 );
 
-var_dump($credentials);
-var_dump($_POST);
+
 $insertAutoBdd = $bdd -> prepare('INSERT INTO vroumvroum (marque, modele, years, couleur)
 VALUES (:marque, :modele, :years, :couleur)');
 
@@ -28,16 +27,15 @@ $verficiation = $insertAutoBdd -> execute(array(
   "couleur" => $credentials['couleur']
 ));
 
+
+
 if ($verficiation) {
 
-  $msg = "Creation reussie, livraison dans 6 mois !";
   //Je renvois une reponse JSON
-  header('content-Type: application/json');
+  header('Content-Type: application/json');
 
   //Je formate la reponse en JSON
   echo json_encode(array(
-    "success" => true,
-    "msg" => $msg
+    "success" => true
   ));
-
 }

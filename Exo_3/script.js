@@ -24,12 +24,18 @@ $('.create_auto').on('submit', function (e) {
 //On créer la requete AJAX
 var createAuto = function(credentials) {
 
+
   $.ajax({
-    method : 'POST',
-    url : 'http://localhost/Evaluations_WF3/Exo_3/read.php',
-    data : credentials,
-    success : function() {
-      $(".return").append($("<p>Braco</p>"));
+    method: 'POST',
+    url: 'http://localhost/Evaluations_WF3/Exo_3/read.php',
+    data: credentials,
+    success: function(response) {
+      if (response.success) {
+        $('.return').append("Reussite");
+      } else {
+        $('.return').append("Echec");
+      }
+
     }
   });
 
