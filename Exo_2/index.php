@@ -8,22 +8,35 @@ if(isset($_GET['order']) && isset($_GET['column'])) {
 
 	if($_GET['column'] == 'lastname') {
 		$order = ' ORDER BY lastname';
+
+		if ($_GET['order'] == 'asc') {
+			$order .= ' ASC';
+
+		} elseif ($_GET['order'] == 'desc') {
+			$order .= ' DESC';
+		}
 	}
 
 	elseif($_GET['column'] == 'firstname') {
 		$order = ' ORDER BY firstname';
+
+		if ($_GET['order'] == 'asc') {
+			$order .= ' ASC';
+
+		} elseif ($_GET['order'] == 'desc') {
+			$order .= ' DESC';
+		}
 	}
 
 	elseif($_GET['column'] == 'birthdate') {
 		$order = ' ORDER BY birthdate';
-	}
 
-	elseif($_GET['order'] == 'asc') {
-		$order .= ' ASC';
-	}
+		if ($_GET['order'] == 'asc') {
+			$order .= ' ASC';
 
-	elseif($_GET['order'] == 'desc') {
-		$order .= ' DESC';
+		} elseif ($_GET['order'] == 'desc') {
+			$order .= ' DESC';
+		}
 	}
 
 }
@@ -93,7 +106,9 @@ if(!empty($_POST)) {
 }
 
 $queryUsers = $db->prepare('SELECT * FROM users'.$order);
+
 var_dump($queryUsers);
+
 if($queryUsers->execute()) {
 	$users = $queryUsers -> fetchAll();
 }
@@ -117,8 +132,8 @@ if($queryUsers->execute()) {
 				<a href="index.php?column=firstname&order=desc">Prénom (décroissant)</a> |
 				<a href="index.php?column=lastname&order=asc">Nom (croissant)</a> |
 				<a href="index.php?column=lastname&order=desc">Nom (décroissant)</a> |
-				<a href="index.php?column=birthdate&order=asc">Âge (croissant)</a> |
-				<a href="index.php?column=birthdate&order=desc">Âge (décroissant)</a>
+				<a href="index.php?column=birthdate&order=desc">Âge (croissant)</a> |
+				<a href="index.php?column=birthdate&order=asc">Âge (décroissant)</a>
 			</p>
 
 			<br>
